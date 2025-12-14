@@ -1,0 +1,24 @@
+:root{
+  --bg: #ffffff;
+  --card: #f8fafc;
+  --text: #0b1220;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --input-bg: #ffffff;
+  --border: #e6eef8;
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(8,15,30,0.06);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #071022;
+    --card: #071426;
+    --text: #e6eef8;
+    --muted: #9aa6b2;
+    --primary: #3aa0ff;
+    --input-bg: #041423;
+    --border: #0f2a3f;
+    --shadow: 0 6px 18px rgba(2,6,12,0.6);
+  }
+}

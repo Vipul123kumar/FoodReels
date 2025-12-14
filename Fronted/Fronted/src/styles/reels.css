@@ -1,0 +1,63 @@
+/* Reels / full-screen vertical snapping */
+html,body,#root { height: 100%; }
+.reels-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.reel-item {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: black;
+}
+
+.reel-video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.reel-overlay {
+  position: absolute;
+  top: 18px; /* top-aligned per request */
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.reel-desc {
+  max-width: 75%;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reel-btn {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  align-self: center;
+}
+
+@media (min-width: 800px){
+  .reel-desc { font-size: 18px; }
+}
