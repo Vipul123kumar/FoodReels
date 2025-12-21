@@ -5,7 +5,9 @@ const  authUserMiddleware  = require('../middleWares/auth.middleware');
 const router=express.Router();
 
 router.get("/:id",
-    authUserMiddleware.authUserMiddleware,
-    foodPartnerController.getFoodPartnerById
+     authUserMiddleware.authUserMiddleware,
+     foodPartnerController.getFoodPartnerById
+    
+    
 )
-module.exports=router; 
+module.exports=router;  

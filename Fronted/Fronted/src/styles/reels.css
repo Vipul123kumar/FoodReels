@@ -63,5 +63,8 @@ html,body,#root { height: 100%; }
 }
 .initial
 {
-  color:azure
+  height: 100vh;
+  width: 100%;
+  color:black;
+  background:azure;
 }

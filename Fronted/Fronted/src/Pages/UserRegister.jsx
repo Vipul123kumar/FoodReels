@@ -20,8 +20,7 @@ const UserRegister = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };
-
+  };   
      
   const handleSubmit= async(e)=>
   {
@@ -33,7 +32,7 @@ const UserRegister = () => {
       console.log(res.data);
       navigate("/");
       
-    }
+    } 
     catch (err)
     {
       setError(err.response?.data?.message || "something wrong");

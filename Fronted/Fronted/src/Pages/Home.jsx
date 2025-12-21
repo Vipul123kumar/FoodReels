@@ -2,11 +2,13 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/reels.css'
+
 import { Link } from "react-router-dom";
 
 import axios from 'axios'
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import {reelsData} from '../api/authService';
 
 const Home = () => {
    const {isAuthenticated,setIsAuthenticated}=useContext(AuthContext)
@@ -44,29 +46,40 @@ const Home = () => {
   
 
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }, []);
+  
 
 
 
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/food",{withCredentials:true})
-      .then(response => {
-        setReels(response.data.foodItems)
-        console.log("page reload");
+  useEffect( () => {
+    // axios
+    //   .get("http://localhost:3000/api/food",{withCredentials:true})
+    //   .then(response => {
+    //     setReels(response.data.foodItems)
+    //     console.log("page reload");
         
-      })
-      .catch((err) => console.log(err))
+    //   })
+    //   .catch((err) => console.log(err))
    
-    console.log("on first time");
+    // console.log("on first time");
+    const fetchReels=async()=>
+    {
+
     
-  }, [])
+    try {
+       const res=await reelsData();
+       console.log(res);
+       
+       setReels (res.data.foodItems);
+    }
+    catch(err)
+    {
+      console.log("error in fetching reels data");
+    }
+  }
+  
+    fetchReels();
+  }, [])  
  
   return (
     
@@ -110,13 +123,8 @@ const Home = () => {
       ))}
     </div>
             ):(
-              <div className='initial'>
-                  <button
-                  type='button'
-                //  onClick={()=>setCount(count+1)}
-                  >
-                    increase count {count}
-                  </button>
+              <div className='bg-white h-full w-full'>
+                 <h3 className='initial'>Hello Vipul</h3>
               </div>
             )
          }

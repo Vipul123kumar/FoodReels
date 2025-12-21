@@ -1,31 +1,42 @@
 import React from 'react'
 import '../styles/auth.css'
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginPartner } from '../api/authService';
 
 const PartnerLogin = () => {
    const navigate=useNavigate();
+    const[formData,setFormData]=useState({
+          
+           email:" ",
+           password:"",
+         })
+
+    const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+      const[loading,setLoading]=useState(false);
+      const[error,setError]=useState("");
+        
+   
       const handleSubmit= async(e)=>
       {
         e.preventDefault();
-       
-        const email=e.target.email.value;
-       
-        const password=e.target.password.value;
-       
-     
-       const res= await axios.post("http://localhost:3000/api/auth/food-partner/login",
-            {
-              
-                email:email,
-                password:password,
-              
-            },{
-                withCredentials:true
-            }
-        )
-        console.log( res.data);
+        setError("");
+      
+      try{
+        setLoading(true);
+        const res= await loginPartner(formData);
+         console.log( res.data);
         navigate("/create/food")
+      }
+        catch(err)
+        {
+          console.log("login failed");
+        }
       }
 
   return (
@@ -35,10 +46,10 @@ const PartnerLogin = () => {
         <p className="auth-sub">Access your partner dashboard</p>
         <form className="auth-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Business email</label>
-          <input id="email" name="email" type="email" placeholder="contact@biz.com" />
+          <input id="email" name="email" type="email" placeholder="contact@biz.com" onChange={handleChange} />
 
           <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="••••••••" />
+          <input id="password" name="password" type="password" placeholder="••••••••" onChange={handleChange} />
 
           <button type="submit" className="btn-primary">Sign in</button>
         </form>

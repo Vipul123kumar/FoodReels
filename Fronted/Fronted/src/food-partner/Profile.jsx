@@ -6,19 +6,27 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 const Profile = () => {
- const {id}=useParams();
+// const {id}=useParams();
+ const params = useParams();
+const id = params.foodPartnerId;
+console.log("fronted",id);
+
+
  const [profile,setProfile]=useState(null)
  const videos=Array.from({length:9},(_,i)=>({id:i+1}))
 
  useEffect(()=>{
+    if(!id) return ;
     axios.get(`http://localhost:3000/api/food-partner/${id}`,{withCredentials:true})
     .then (response=>{
         
         setProfile(response.data.foodPartner)
-        console.log(response);
+        console.log("Response",response);
         
     }) 
      .catch(err => {
+        console.log("deg");
+        
       console.log("GET ERROR:", err.response?.data || err);
     });
  },[id])

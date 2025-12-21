@@ -29,6 +29,6 @@ async function getFoodItems(req,res)
     foodItems
    })
 }
-module.exports = { createFood ,getFoodItems }
+module.exports = { createFood ,getFoodItems } 
 
 

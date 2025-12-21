@@ -42,7 +42,7 @@ async function loginUser(req,res) {
     const isUserExist=await userModel.findOne({email});
     if(!isUserExist)
     {
-        res.status(404).json(
+       return res.status(404).json(
         {
             message:"Username or password invalid"
         })
@@ -93,7 +93,7 @@ async function registerFoodPartner(req,res)
    })
 
    const token=jwt.sign({
-    _id:foodPartner._id,
+    id:foodPartner._id,
 
    },process.env.JWT_SECRET)
 

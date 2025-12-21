@@ -6,14 +6,14 @@ async function authFoodPartnerMiddleware(req,res,next)
     const token=req.cookies.token;
     if(!token)
     {
-        res.status(401).json({
+       return res.status(401).json({
             message:"unauthorized access"
         })
     }
     try{
         // check karo token 
        const decoded= jwt.verify(token,process.env.JWT_SECRET)
-       const foodPartner=await foodPartnerModal.findById(decoded.id);
+       const foodPartner=await foodPartnerModal.findById(decoded._id);
        // here creating a new property in req foodPartner and 
        req.foodPartner=foodPartner
        next()
@@ -33,10 +33,11 @@ async function authUserMiddleware(req,res,next) {
         return res.status(401).json({
             message:"Please Login first"
         })
+        next()
     }
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET)
-        const user=await userModel.findById(decoded.id);
+        const user=await userModel.findById(decoded._id);
         req.user=user
         next()
     } catch(err)
