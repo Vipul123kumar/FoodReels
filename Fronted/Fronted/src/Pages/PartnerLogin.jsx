@@ -1,10 +1,18 @@
 import React from 'react'
 import '../styles/auth.css'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginPartner } from '../api/authService';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const PartnerLogin = () => {
+ const {partner}=useContext(AuthContext);
+  const{setPartner}=useContext(AuthContext);
+     useEffect(() => {
+  console.log("Updated partner:", partner);
+}, [partner])
+
    const navigate=useNavigate();
     const[formData,setFormData]=useState({
           
@@ -31,7 +39,15 @@ const PartnerLogin = () => {
         setLoading(true);
         const res= await loginPartner(formData);
          console.log( res.data);
+         console.log(res.data.partner);   // partner object
+         console.log(res.data.partner._id);
+         setPartner(res.data.partner._id);
+         console.log("login me partner",partner);
+         
+        console.log(res);
+      
         navigate("/create/food")
+        
       }
         catch(err)
         {

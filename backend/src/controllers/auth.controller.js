@@ -136,6 +136,11 @@ async function loginFoodPartner(req,res){
     res.cookie("token",token);
     res.status(200).json({
         message:"Food partner Logged Successfully",
+          partner: {
+    _id: foodPartner._id,
+    email: foodPartner.email,
+    name: foodPartner.name,
+  },
 
     })
 

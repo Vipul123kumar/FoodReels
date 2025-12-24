@@ -5,12 +5,16 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext'
 const Profile = () => {
 // const {id}=useParams();
  const params = useParams();
-const id = params.foodPartnerId;
-console.log("fronted",id);
 
+//const id='69478acaeb6876c9c9137045';
+//console.log("fronted",id);
+const {partner}=useContext(AuthContext)
+  const id = partner;
 
  const [profile,setProfile]=useState(null)
  const videos=Array.from({length:9},(_,i)=>({id:i+1}))
@@ -30,6 +34,7 @@ console.log("fronted",id);
       console.log("GET ERROR:", err.response?.data || err);
     });
  },[id])
+
   return (
 
        <main className="profile-page">
@@ -54,8 +59,8 @@ console.log("fronted",id);
                     <div className="profile-stat" role="listitem">
                         <span className="profile-stat-label">total meals</span>
                         <span className="profile-stat-value">
-                            {/* {profile?.totalMeals} */}
-                            total meals
+                            {profile?.totalMeals}
+                            
                             </span>
                     </div>
                     <div className="profile-stat" role="listitem">

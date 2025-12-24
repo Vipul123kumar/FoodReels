@@ -2,9 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/reels.css'
-
 import { Link } from "react-router-dom";
-
 import axios from 'axios'
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
@@ -12,10 +10,14 @@ import {reelsData} from '../api/authService';
 
 const Home = () => {
    const {isAuthenticated,setIsAuthenticated}=useContext(AuthContext)
+   const {setPartner}=useContext(AuthContext);
+   const {partner}=useContext(AuthContext);
   const containerRef = useRef(null)
   const [reels, setReels] = useState([])
 
+ 
   
+console.log("parner store",partner);
 
   // Auto-play logic
   useEffect(() => {
@@ -43,33 +45,21 @@ const Home = () => {
    const [count,setCount]=useState(0);
   // Fetch reels from API
   //for check 
-  
-
-
-  
-
-
-
-
   useEffect( () => {
     // axios
     //   .get("http://localhost:3000/api/food",{withCredentials:true})
     //   .then(response => {
     //     setReels(response.data.foodItems)
-    //     console.log("page reload");
-        
+    //     console.log("page reload"); 
     //   })
     //   .catch((err) => console.log(err))
-   
     // console.log("on first time");
+    
     const fetchReels=async()=>
     {
-
-    
     try {
        const res=await reelsData();
        console.log(res);
-       
        setReels (res.data.foodItems);
     }
     catch(err)
@@ -107,16 +97,13 @@ const Home = () => {
 
            <div className="reel-overlay">
             <p className="reel-desc">{item.desc}</p>
-           <Link className="reel-btn" to={`/food-partner/${item.foodPartner}`}>
+           <Link className="reel-btn" to=
+          //  {`/food-partner/${partner}`}
+           {`/food-partner/${item.foodPartner._id}`}
+           >
            Visit store
-          </Link>
-             {/* <button
-                  type='button'
-                 onClick={()=>setCount(count+1)}
-                 
-                  >
-                    increase count {count}
-                  </button> */}
+          </Link> 
+
           </div>
           
         </section>
