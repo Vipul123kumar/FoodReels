@@ -23,3 +23,7 @@ export const reelsData=()=>
 {
     return axiosInstance.get("/api/food",{withCredentials:true});
 }
+export const uploadVideo=(payload)=>
+{
+    return axiosInstance.post("/api/food",payload)
+}

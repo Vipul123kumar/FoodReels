@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import {reelsData} from '../api/authService';
-
+import Food from './Food';
 const Home = () => {
    const {isAuthenticated,setIsAuthenticated}=useContext(AuthContext)
    const {setPartner}=useContext(AuthContext);
@@ -76,12 +76,12 @@ console.log("parner store",partner);
     <div> 
          {
             isAuthenticated ?(
-              <div className="reels-container" ref={containerRef}>
+              <div className="reels-container w-90 mt-2 rounded-[10px] mb-2 gap-2 ml-140 items-center" ref={containerRef}>
       {reels.map((item) => (
-        <section className="reel-item" key={item._id}>
+        <section className="reel-item " key={item._id}>
           
           <video
-            className="reel-video"
+            className="reel-video "
             src={item.video}   // <— your API video URL
             muted
             playsInline
@@ -110,8 +110,29 @@ console.log("parner store",partner);
       ))}
     </div>
             ):(
-              <div className='bg-white h-full w-full'>
-                 <h3 className='initial'>Hello Vipul</h3>
+              <div className=''>
+                < Food/>
+                 {/* <h3 className='initial'>Hello Vipul</h3>
+
+                 <div>
+      <input type="file" accept="video/*"
+      // onChange={handleVideoChange}
+        />
+      <button
+      // onClick={handleUpload}
+      type='button'
+       >Upload Video</button>
+    </div> */}
+
+                 {/* <input
+                  type='text'
+                  placeholder='enter meal'
+
+                 />
+                 <input
+                  type='text'
+                  placeholder='description'
+                 /> */}
               </div>
             )
          }
